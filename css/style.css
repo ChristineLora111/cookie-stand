@@ -1,0 +1,23 @@
+h1 {
+    text-align: center;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    margin-left: 2.5%;
+    color: #b82e8a
+}
+
+table {
+    text-align: left;
+    border: 1px solid #8977b1;
+    background-color: #ffe6e6;
+    margin-left: 1.5%;
+    color: #0F2557;
+}
+
+th {
+    padding: 5px;
+    text-decoration: underline #b82e8a;
+  }
+  tr {
+    padding: 14px;
+    border-bottom: 2px solid black;
+  }
