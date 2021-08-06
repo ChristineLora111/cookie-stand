@@ -72,7 +72,7 @@ article h3 {
 
 article p span {
     display: block;
-    background-color: white;
+    background-color: #868d71;
 }
 
 article a {
@@ -84,8 +84,13 @@ article a {
     align-self: flex-start;
 }
 
+article p { 
+    color: white;
+
+}
+
 article a:hover {
-    background-color: hsl(350, 100%, 84%);
+    background-color: #bebd6473;
     transition: 350ms; 
 }
 
@@ -98,19 +103,24 @@ footer {
     background-color: white;
     justify-content: space-between;
     display: flex;
+    color: #677739;
 } 
+
+footer > ul>li span {
+    background-color: #ffe6e6;
+}
 
 
 h1 {
     text-align: center;
     font-family:Georgia, 'Times New Roman', Times, serif;
     margin-left: 2.5%;
-    color: #b82e8a
+    color: #8A9A5B;
 }
 
 table, td, th {
     text-align: left;
-    border: 1px solid #8977b1;
+    border: 1px solid #4c7463;
     background-color: #ffe6e6;
     margin-left: 1.5%;
     color: #0F2557;
