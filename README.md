@@ -5,7 +5,7 @@
 
 I build an app with a direct and powerful purpose. It does all of the things that it accomplishes well. I should describe the purpose and functionality so those that visit my README understand the app
 
-### Author: Christine with collaborative help from study table (Carrie V, Johnny B, Brandon M, Brian T, Eddi P)
+### Author: Christine with collaborative help from study table (Carrie V, Johnny B, Brandon M, Brian T, Eddi P and TA Michael)
 
 ### Links and Resources
 * [submission PR](http://xyz.com)
