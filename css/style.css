@@ -135,3 +135,34 @@ th {
     padding: 14px;
     border-bottom: 2px solid black;
   }
+
+  form {
+      width: 100%;
+      margin-top: 2rem;
+      margin-bottom: 2rem;  
+  }
+
+  fieldset {
+      border: 4px double #868d71;
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1rem;
+  }
+
+  legend {
+      color: #b82e8a;
+      font-size: 1.3rem;
+  }
+
+  form button {
+      color: white;
+      background-color: #868d71;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      border: none;
+      padding: .3rem 1rem;    
+  }
+
+  form button:hover {
+    background-color: #b82e8a;
+    transition: 350ms; 
+}
