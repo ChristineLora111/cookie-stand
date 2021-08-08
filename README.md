@@ -1,5 +1,5 @@
 # cookie-stand
-# LAB 08: Salmon Cookies
+# Salmon Cookies
 
 ## cookie-stand
 
