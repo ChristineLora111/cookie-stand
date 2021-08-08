@@ -166,7 +166,7 @@ function renderActualTable() {
     renderNewHeader();
     renderActualTable();
     renderFooterTable();
-    clearAllForm();
+    clearAllForm();   
 
     function clearAllForm () {
         event.target.cookieLocation.value = null;
@@ -175,7 +175,6 @@ function renderActualTable() {
         event.target.cookieAve.value = null;
     }
   }
-  
   cookieForm.addEventListener('submit', handleSubmit);
 
 
