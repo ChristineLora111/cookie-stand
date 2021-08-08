@@ -166,9 +166,16 @@ function renderActualTable() {
     renderNewHeader();
     renderActualTable();
     renderFooterTable();
+    clearAllForm();
 
+    function clearAllForm () {
+        event.target.cookieLocation.value = null;
+        event.target.cookieMin.value = null;
+        event.target.cookieMax.value = null;
+        event.target.cookieAve.value = null;
+    }
   }
   
   cookieForm.addEventListener('submit', handleSubmit);
 
- 
+
