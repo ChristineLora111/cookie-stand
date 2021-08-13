@@ -57,26 +57,26 @@ function CookieStore (location, min, max, avg) {
             this.renderCookiesPerHour();
         }
         this.callUponAll();
-        this.shopArray.push(this);
-        console.log(this.shopArray);
-    }
+        shopArray.push(this);
+}
 
-  CookieStore.prototype.shopArray = [];
-  
-  const seattle = new CookieStore('Seattle', 23, 65, 6.3);
-  const tokyo = new CookieStore('Tokyo', 3, 24, 1.2);
-  const dubai = new CookieStore('Dubai', 11, 38, 3,7);
-  const paris = new CookieStore('Paris', 20, 38, 2.3);
-  const lima = new CookieStore('Lima', 2, 16, 0.6);
-  
-  // Start of table: 
-  // -----------------------------------------------------------
-  const tableCookies = document.getElementById('cookie store')
+const shopArray = [];
 
-  const newTableCookies = document.createElement('table');
-  tableCookies.appendChild(newTableCookies);
+const seattle = new CookieStore('Seattle', 23, 65, 6.3);
+const tokyo = new CookieStore('Tokyo', 3, 24, 1.2);
+const dubai = new CookieStore('Dubai', 11, 38, 3,7);
+const paris = new CookieStore('Paris', 20, 38, 2.3);
+const lima = new CookieStore('Lima', 2, 16, 0.6);
 
-  function renderNewHeader() {
+// Start of table: 
+// -----------------------------------------------------------
+const tableCookies = document.getElementById('cookie store')
+
+const newTableCookies = document.createElement('table');
+newTableCookies.setAttribute('id', 'sale');
+tableCookies.appendChild(newTableCookies);
+
+function renderNewHeader() {
     const rowHeader = document.createElement('tr');
     newTableCookies.appendChild(rowHeader);
 
@@ -90,91 +90,80 @@ function CookieStore (location, min, max, avg) {
     }
 };
 
-function renderActualTable() {
-    for (let i = 0; i < CookieStore.prototype.shopArray.length; i++) {
-        let actualShop = CookieStore.prototype.shopArray[i];
-        const shopTableElem = document.createElement('tr');
-        newTableCookies.appendChild(shopTableElem);
+function elementBuilder(elementToCreate, contents, parent) {
+    let newElement = document.createElement(elementToCreate);
+    newElement.textContent = contents;
+    parent.appendChild(newElement);
+}
 
-        const shopCellElem = document.createElement('th');
-        shopCellElem.textContent = actualShop.location;
-        shopTableElem.appendChild(shopCellElem); 
+CookieStore.prototype.renderTableRow = function() {
+    const shopTableElem = document.createElement('tr');
+    newTableCookies.appendChild(shopTableElem);
 
-        for (let j = 0; j < actualShop.cookiesPerHour.length; j++) {
-            const shopCellElem2 = document.createElement('td');
-            shopCellElem2.textContent = `${actualShop.cookiesPerHour[j]}`;
-            shopTableElem.appendChild(shopCellElem2); 
-        }
-            const shopCellElem3 = document.createElement('td');
-            shopCellElem3.textContent = 'Total Cookies: ' + actualShop.cookiesTotal;
-            shopTableElem.appendChild(shopCellElem3);
-        }
+    elementBuilder('th',this.location,shopTableElem);
+
+
+    for (let j = 0; j < this.cookiesPerHour.length; j++) {
+        elementBuilder('td',`${this.cookiesPerHour[j]}`,shopTableElem);
     }
+    elementBuilder('td','Total Store Cookies: ' + this.cookiesTotal,shopTableElem);
+}
 
-    function renderFooterTable() {
-        const footerElem = document.createElement('tr');
-        newTableCookies.appendChild(footerElem);
-
-        const rowFooterElem = document.createElement('th');
-        rowFooterElem.textContent = 'Total Hourly Cookies: ';
-        footerElem.appendChild(rowFooterElem);
-
-        let dailyTotalCookies = [];
-        for (let h = 0; h < hours.length; h++) {
-            let cookieHourlyTotal = 0;
-            for (let i = 0; i < CookieStore.prototype.shopArray.length; i++) {
-                let currentStore = CookieStore.prototype.shopArray[i];
-                cookieHourlyTotal += currentStore.cookiesPerHour[h];
-            }
-            const shopCellElem2 = document.createElement('td');
-            shopCellElem2.textContent = `${cookieHourlyTotal}`;
-            footerElem.appendChild(shopCellElem2); 
-            dailyTotalCookies.push(cookieHourlyTotal);
-        }
-
-        let cookieDailyTotal = 0;
-        for (let i = 0; i < dailyTotalCookies.length; i++) {
-            cookieDailyTotal += dailyTotalCookies[i];
-        }
-        const shopCellElem3 = document.createElement('td');
-        shopCellElem3.textContent = `Ultimate Total: ` + cookieDailyTotal;
-        footerElem.appendChild(shopCellElem3);
+function renderActualTable(){
+    for (let i = 0; i < shopArray.length; i++) {
+        shopArray[i].renderTableRow();
     }
+}
 
-  renderNewHeader();
-  renderActualTable();
-  renderFooterTable();
+function renderFooterTable() {
+    const footerElem = document.createElement('tfoot');
+    newTableCookies.appendChild(footerElem); 
+
+    elementBuilder('th','Total Cookies Sold Hourly for All Cities',footerElem);
+    let dailyTotalCookies = [];
+    
+    for (let h = 0; h < hours.length; h++) {
+        let cookiesHourlyTotal = 0;
+        for (let i = 0; i < shopArray.length; i++) {
+            let currentStore = shopArray[i];
+            cookiesHourlyTotal += currentStore.cookiesPerHour[h]
+        }
+        elementBuilder('td',`${cookiesHourlyTotal}`,footerElem);
+        dailyTotalCookies.push(cookiesHourlyTotal);
+    }
+    let cookieDailyTotal = 0;
+    for (let i = 0; i < dailyTotalCookies.length; i++) {
+        cookieDailyTotal += dailyTotalCookies[i];
+    }
+    elementBuilder('td',`Ultimate Total: ` + cookieDailyTotal,footerElem);
+}
+
+renderNewHeader();
+renderActualTable();
+renderFooterTable();
 
 
-  let cookieForm = document.getElementById('cookieForm');
+let cookieForm = document.getElementById('cookieForm');
+let tfoot = document.querySelector('tfoot');
 
-  function handleSubmit(event) {
-      event.preventDefault();
+function handleSubmit(event) {
+    event.preventDefault();
     let cookieLocation = event.target.cookieLocation.value;
     let cookieMin = +event.target.cookieMin.value;
     let cookieMax = +event.target.cookieMax.value;
     let cookieAvg = +event.target.cookieAvg.value;
   
-  new CookieStore (
+  let newStore = new CookieStore (
       cookieLocation,
       cookieMin,
       cookieMax,
       cookieAvg,
   );
 
-    newTableCookies.innerHTML = '';
+    let tableElem = document.getElementById('sale');
+    tableElem.innerHTML = '';
     renderNewHeader();
     renderActualTable();
     renderFooterTable();
-    clearAllForm();   
-
-    function clearAllForm () {
-        event.target.cookieLocation.value = null;
-        event.target.cookieMin.value = null;
-        event.target.cookieMax.value = null;
-        event.target.cookieAve.value = null;
-    }
-  }
-  cookieForm.addEventListener('submit', handleSubmit);
-
-
+}
+  cookieForm.addEventListener('submit', handleSubmit)
