@@ -65,9 +65,10 @@ article {
 }
 
 article h3 {
-    font-size: 1.5rem;
+    font-size: 3rem;
     margin-bottom: .5rem;
     color: #677739;
+    font-family: 'Architects Daughter', cursive;
 }
 
 article p span {
@@ -166,3 +167,6 @@ th {
     background-color: #b82e8a;
     transition: 350ms; 
 }
+
+
+
